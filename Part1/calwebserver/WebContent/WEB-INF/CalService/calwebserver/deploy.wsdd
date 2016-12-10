@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CalService WSDL service -->
+
+  <service name="Cal" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://calwebserver"/>
+      <parameter name="wsdlServiceElement" value="CalService"/>
+      <parameter name="schemaQualified" value="http://calwebserver"/>
+      <parameter name="wsdlServicePort" value="Cal"/>
+      <parameter name="className" value="calwebserver.Cal"/>
+      <parameter name="wsdlPortType" value="Cal"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://calwebserver" xmlns:retNS="http://calwebserver" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="cal" qname="operNS:cal" returnQName="retNS:calReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://calwebserver" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:first_num" type="tns:double"/>
+        <parameter xmlns:pns="http://calwebserver" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sec_num" type="tns:double"/>
+        <parameter xmlns:pns="http://calwebserver" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:operator" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="cal"/>
+
+  </service>
+</deployment>

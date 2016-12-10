@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SubmitCartService WSDL service -->
+
+  <service name="SubmitCart" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+      <parameter name="wsdlServiceElement" value="SubmitCartService"/>
+      <parameter name="schemaQualified" value="http://ebayAppServer"/>
+      <parameter name="wsdlServicePort" value="SubmitCart"/>
+      <parameter name="className" value="ebayAppServer.SubmitCartSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="SubmitCart"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="submitCart" qname="operNS:submitCart" xmlns:operNS="http://ebayAppServer" returnQName="retNS:submitCartReturn" xmlns:retNS="http://ebayAppServer" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:updateSql" xmlns:pns="http://ebayAppServer" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:insertSql" xmlns:pns="http://ebayAppServer" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="submitCart"/>
+
+  </service>
+</deployment>

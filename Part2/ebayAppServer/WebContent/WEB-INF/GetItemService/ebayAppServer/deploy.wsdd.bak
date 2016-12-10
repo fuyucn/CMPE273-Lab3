@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GetItemService WSDL service -->
+
+  <service name="GetItem" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+      <parameter name="wsdlServiceElement" value="GetItemService"/>
+      <parameter name="schemaQualified" value="http://ebayAppServer"/>
+      <parameter name="wsdlServicePort" value="GetItem"/>
+      <parameter name="className" value="ebayAppServer.GetItemSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="GetItem"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getItem" qname="operNS:getItem" xmlns:operNS="http://ebayAppServer" returnQName="retNS:getItemReturn" xmlns:retNS="http://ebayAppServer" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sql" xmlns:pns="http://ebayAppServer" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getItem"/>
+
+  </service>
+</deployment>

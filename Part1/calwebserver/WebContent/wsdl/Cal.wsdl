@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://calwebserver" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://calwebserver" xmlns:intf="http://calwebserver" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://calwebserver" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="cal">
+    <complexType>
+     <sequence>
+      <element name="first_num" type="xsd:double"/>
+      <element name="sec_num" type="xsd:double"/>
+      <element name="operator" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="calResponse">
+    <complexType>
+     <sequence>
+      <element name="calReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="calRequest">
+
+      <wsdl:part element="impl:cal" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="calResponse">
+
+      <wsdl:part element="impl:calResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Cal">
+
+      <wsdl:operation name="cal">
+
+         <wsdl:input message="impl:calRequest" name="calRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:calResponse" name="calResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CalSoapBinding" type="impl:Cal">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="cal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="calRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="calResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CalService">
+
+      <wsdl:port binding="impl:CalSoapBinding" name="Cal">
+
+         <wsdlsoap:address location="http://localhost:8080/calwebserver/services/Cal"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

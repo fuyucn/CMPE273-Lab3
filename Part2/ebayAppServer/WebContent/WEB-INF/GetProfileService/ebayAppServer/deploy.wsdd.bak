@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GetProfileService WSDL service -->
+
+  <service name="GetProfile" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+      <parameter name="wsdlServiceElement" value="GetProfileService"/>
+      <parameter name="schemaQualified" value="http://ebayAppServer"/>
+      <parameter name="wsdlServicePort" value="GetProfile"/>
+      <parameter name="className" value="ebayAppServer.GetProfileSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="GetProfile"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getProfile" qname="operNS:getProfile" xmlns:operNS="http://ebayAppServer" returnQName="retNS:getProfileReturn" xmlns:retNS="http://ebayAppServer" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userid" xmlns:pns="http://ebayAppServer" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getProfile"/>
+
+  </service>
+</deployment>

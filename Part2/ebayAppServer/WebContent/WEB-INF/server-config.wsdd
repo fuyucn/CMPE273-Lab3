@@ -1,0 +1,175 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="E:\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ebayAppServer\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="GetItem" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="getItem" qname="ns1:getItem" returnQName="ns1:getItemReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:sql" type="xsd:string"/>
+  </ns2:operation>
+  <ns1:parameter name="allowedMethods" value="getItem"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="GetItem"/>
+  <ns1:parameter name="className" value="ebayAppServer.GetItem"/>
+  <ns1:parameter name="wsdlServicePort" value="GetItem"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="GetItemService"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="User" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getUserInfo" qname="ns2:getUserInfo" returnQName="ns2:getUserInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:userid" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getUserInfo"/>
+  <ns1:parameter name="wsdlPortType" value="User"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServicePort" value="User"/>
+  <ns1:parameter name="className" value="ebayAppServer.User"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="UserService"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="GetUserSells" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getusersells" qname="ns3:getusersells" returnQName="ns3:getusersellsReturn" returnType="ns4:Map" soapAction="" xmlns:ns3="http://ebayAppServer" xmlns:ns4="http://xml.apache.org/xml-soap">
+   <ns1:parameter qname="ns3:userid" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getusersells"/>
+  <ns1:parameter name="wsdlPortType" value="GetUserSells"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://xml.apache.org/xml-soap,http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServicePort" value="GetUserSells"/>
+  <ns1:parameter name="className" value="ebayAppServer.GetUserSells"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="GetUserSellsService"/>
+ </ns1:service>
+ <ns1:service name="Register" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="reg" qname="ns5:reg" returnQName="ns5:regReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:username" type="xsd:string"/>
+   <ns1:parameter qname="ns5:password" type="xsd:string"/>
+   <ns1:parameter qname="ns5:firstname" type="xsd:string"/>
+   <ns1:parameter qname="ns5:lastname" type="xsd:string"/>
+   <ns1:parameter qname="ns5:location" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="reg"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Register"/>
+  <ns1:parameter name="className" value="ebayAppServer.Register"/>
+  <ns1:parameter name="wsdlServicePort" value="Register"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="RegisterService"/>
+ </ns1:service>
+ <ns1:service name="GetUserBuys" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getuserbuys" qname="ns6:getuserbuys" returnQName="ns6:getuserbuysReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:userid" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getuserbuys"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="GetUserBuys"/>
+  <ns1:parameter name="className" value="ebayAppServer.GetUserBuys"/>
+  <ns1:parameter name="wsdlServicePort" value="GetUserBuys"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="GetUserBuysService"/>
+ </ns1:service>
+ <ns1:service name="SubmitCart" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="submitCart" qname="ns7:submitCart" returnQName="ns7:submitCartReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:updateSql" type="xsd:string"/>
+   <ns1:parameter qname="ns7:insertSql" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="submitCart"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="SubmitCart"/>
+  <ns1:parameter name="className" value="ebayAppServer.SubmitCart"/>
+  <ns1:parameter name="wsdlServicePort" value="SubmitCart"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="SubmitCartService"/>
+ </ns1:service>
+ <ns1:service name="AddItem" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="addItem" qname="ns8:addItem" returnQName="ns8:addItemReturn" returnType="xsd:boolean" soapAction="" xmlns:ns8="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns8:sql" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="addItem"/>
+  <ns1:parameter name="wsdlPortType" value="AddItem"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServicePort" value="AddItem"/>
+  <ns1:parameter name="className" value="ebayAppServer.AddItem"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="AddItemService"/>
+ </ns1:service>
+ <ns1:service name="Login" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="login" qname="ns9:login" returnQName="ns9:loginReturn" returnType="ns10:Map" soapAction="" xmlns:ns10="http://xml.apache.org/xml-soap" xmlns:ns9="http://ebayAppServer">
+   <ns1:parameter qname="ns9:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns9:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="login"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Login"/>
+  <ns1:parameter name="className" value="ebayAppServer.Login"/>
+  <ns1:parameter name="wsdlServicePort" value="Login"/>
+  <ns1:parameter name="schemaQualified" value="http://xml.apache.org/xml-soap,http://ebayAppServer"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="LoginService"/>
+ </ns1:service>
+ <ns1:service name="GetProfile" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getProfile" qname="ns11:getProfile" returnQName="ns11:getProfileReturn" returnType="xsd:string" soapAction="" xmlns:ns11="http://ebayAppServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:userid" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getProfile"/>
+  <ns1:parameter name="wsdlPortType" value="GetProfile"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServicePort" value="GetProfile"/>
+  <ns1:parameter name="className" value="ebayAppServer.GetProfile"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ebayAppServer"/>
+  <ns1:parameter name="wsdlServiceElement" value="GetProfileService"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
